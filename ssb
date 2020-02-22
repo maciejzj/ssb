@@ -93,4 +93,25 @@ function gen_template
 }
 
 
+function get_posts
+{
+	if [ "$RECURSE_POSTS" = false ]; then
+		DEPTH_LIMITER="-maxdepth 1"
+	fi
+	
+	find $POSTS_DIR $DEPTH_LIMITER -type f -name "*.md"
+}
+
+set_default_args
 parse_optargs $@
+shift `expr $OPTIND - 1`
+pages="$@"
+posts=`get_posts`
+
+md_files="$pages $posts"
+
+for md_file in $md_files; do
+    file_base=`basename $md_file .md`
+    $MARKDOWN_RENDERER $md_file > $file_base.html
+    cat $HEADER_PATH $file_base.html $FOOTER_PATH | tee $file_base.html
+done
