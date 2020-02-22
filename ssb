@@ -101,6 +101,17 @@ function get_posts
 	find $POSTS_DIR $DEPTH_LIMITER -type f -name "*.md"
 }
 
+
+function append_posts_list
+{
+	for post in $@; do
+		post_title=`grep -m 1 "^# .*" $post | cut -c 3-`
+		posts_list="$posts_list $post_title \n"
+	done
+	echo $posts_list
+}
+
+
 set_default_args
 parse_optargs $@
 shift `expr $OPTIND - 1`
@@ -111,6 +122,6 @@ md_files="$pages $posts"
 
 for md_file in $md_files; do
 	file_base=`basename $md_file .md`
-	$MARKDOWN_RENDERER $md_file > $file_base.html
+	append_posts_list $posts | cat $md_file - | $MARKDOWN_RENDERER > $file_base.html
 	cat $HEADER_PATH $file_base.html $FOOTER_PATH | tee $file_base.html
 done
