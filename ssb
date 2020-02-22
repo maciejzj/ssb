@@ -3,18 +3,34 @@
 function usage
 {
 	echo \
-		"Usage: $0 [-h|-d|-g] [-e HEADER_PATH] [-f FOOTER_PATH]" \
-		"[-c CSS_PATH] [-o OUTPUT_DIR] [-p POSTS_DIR]"
+		"Usage: $0 [-d|-g|-h|-r] [-c CSS_PATH] [-e HEADER_PATH]" \
+		"[-f FOOTER_PATH] [-o OUTPUT_DIR] [-p POSTS_DIR]"
 	exit 0
 }
 
 
 function parse_optargs
 {
-	while getopts "h" opt; do
+	while getopts "dghrc:e:f:o:p:" opt; do
 		case $opt in
+			d)
+				DISABLE_POSTS=true;;
+			g)
+				GENERATE_TEMPLATE=true;;
 			h)
 				usage;;
+			r)
+				RECURSE_POSTS=true;;
+			c)
+				CSS_PATH=$OPTARG;;
+			e)
+				HEADER_PATH=$OPTARG;;
+			f)
+				FOOTER_PATH=$OPTARG;;
+			o)
+				OUTPUT_DIR=$OPTARG;;
+			p)
+				POSTS_DIR=$OPTARG;;
 		esac
 	done
 }
