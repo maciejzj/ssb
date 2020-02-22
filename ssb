@@ -16,7 +16,7 @@ function parse_optargs
 			d)
 				DISABLE_POSTS=true;;
 			g)
-				GENERATE_TEMPLATE=true;;
+				gen_template;;
 			h)
 				usage;;
 			r)
@@ -45,5 +45,47 @@ function set_default_args
 	POSTS_DIR=./posts
 }
 
+function echo_header_template
+{
+	echo \
+'<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
 
+    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<header>
+<nav>
+    <strong>Title</strong>&nbsp;
+    <a href="./index.html">home</a>&nbsp;
+    -&nbsp;
+    <a href="">media</a>&nbsp;
+    <a href="mailto:">email</a>
+</nav>
+</header>
+'
+}
+
+
+function echo_footer_template
+{
+	echo \
+'<footer>
+</footer>
+</body>
+</html>'
+}	
+
+
+function gen_template
+{
+	echo_header_template > ./header.html
+	echo_footer_template > ./footer.html
+}
 parse_optargs $@
