@@ -1,0 +1,23 @@
+#!/bin/sh
+
+function usage
+{
+	echo \
+		"Usage: $0 [-h|-d|-g] [-e HEADER_PATH] [-f FOOTER_PATH]" \
+		"[-c CSS_PATH] [-o OUTPUT_DIR] [-p POSTS_DIR]"
+	exit 0
+}
+
+
+function parse_optargs
+{
+	while getopts "h" opt; do
+		case $opt in
+			h)
+				usage;;
+		esac
+	done
+}
+
+
+parse_optargs $@
