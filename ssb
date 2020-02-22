@@ -68,7 +68,6 @@ function echo_header_template
     <strong>Title</strong>&nbsp;
     <a href="./index.html">home</a>&nbsp;
     -&nbsp;
-    <a href="">media</a>&nbsp;
     <a href="mailto:">email</a>
 </nav>
 </header>
