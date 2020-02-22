@@ -54,21 +54,21 @@ function echo_header_template
 '<!DOCTYPE html>
 <html lang=en>
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 
-    <title>Title</title>
+	<title>Title</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
 <header>
 <nav>
-    <strong>Title</strong>&nbsp;
-    <a href="./index.html">home</a>&nbsp;
-    -&nbsp;
-    <a href="mailto:">email</a>
+	<strong>Title</strong>&nbsp;
+	<a href="./index.html">home</a>&nbsp;
+	-&nbsp;
+	<a href="mailto:">email</a>
 </nav>
 </header>
 '
@@ -82,7 +82,7 @@ function echo_footer_template
 </footer>
 </body>
 </html>'
-}	
+}
 
 
 function gen_template
@@ -97,7 +97,7 @@ function get_posts
 	if [ "$RECURSE_POSTS" = false ]; then
 		DEPTH_LIMITER="-maxdepth 1"
 	fi
-	
+
 	find $POSTS_DIR $DEPTH_LIMITER -type f -name "*.md"
 }
 
@@ -110,7 +110,7 @@ posts=`get_posts`
 md_files="$pages $posts"
 
 for md_file in $md_files; do
-    file_base=`basename $md_file .md`
-    $MARKDOWN_RENDERER $md_file > $file_base.html
-    cat $HEADER_PATH $file_base.html $FOOTER_PATH | tee $file_base.html
+	file_base=`basename $md_file .md`
+	$MARKDOWN_RENDERER $md_file > $file_base.html
+	cat $HEADER_PATH $file_base.html $FOOTER_PATH | tee $file_base.html
 done
