@@ -4,14 +4,14 @@ function usage
 {
 	echo \
 		"Usage: $0 [-d|-g|-h|-r] [-c CSS_PATH] [-e HEADER_PATH]" \
-		"[-f FOOTER_PATH] [-o OUTPUT_DIR] [-p POSTS_DIR]"
+		"[-f FOOTER_PATH] [-m MARKDOWN_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR]"
 	exit 0
 }
 
 
 function parse_optargs
 {
-	while getopts "dghrc:e:f:o:p:" opt; do
+	while getopts "dghrc:e:f:m:o:p:" opt; do
 		case $opt in
 			d)
 				DISABLE_POSTS=true;;
@@ -27,6 +27,8 @@ function parse_optargs
 				HEADER_PATH=$OPTARG;;
 			f)
 				FOOTER_PATH=$OPTARG;;
+			m)
+				MARKDOWN_RENDERER=$OPTARG;;
 			o)
 				OUTPUT_DIR=$OPTARG;;
 			p)
@@ -41,6 +43,7 @@ function set_default_args
 	CSS_PATH=./styles.css
 	FOOTER_PATH=./footer.html
 	HEADER_PATH=./header.html
+	MARKDOWN_RENDERER=pandoc
 	OUTPUT_DIR=./
 	POSTS_DIR=./posts
 }
@@ -88,4 +91,6 @@ function gen_template
 	echo_header_template > ./header.html
 	echo_footer_template > ./footer.html
 }
+
+
 parse_optargs $@
