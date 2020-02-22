@@ -36,4 +36,14 @@ function parse_optargs
 }
 
 
+function set_default_args
+{
+	CSS_PATH=./styles.css
+	FOOTER_PATH=./footer.html
+	HEADER_PATH=./header.html
+	OUTPUT_DIR=./
+	POSTS_DIR=./posts
+}
+
+
 parse_optargs $@
