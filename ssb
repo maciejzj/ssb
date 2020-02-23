@@ -86,7 +86,7 @@ function echo_footer_template
 function echo_css_template
 {
 	echo \
-'body { }
+'body { max-width: 45em; margin: auto; padding: 1.5em }
 header { }
 footer { }
 nav { }
