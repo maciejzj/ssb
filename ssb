@@ -4,7 +4,7 @@ function usage
 {
 	echo \
 		"Usage: $0 [-d|-g|-h|-r] [-c CSS_PATH] [-e HEADER_PATH]" \
-		"[-f FOOTER_PATH] [-m MARKDOWN_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR]"
+		"[-f FOOTER_PATH] [-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR]"
 }
 
 
@@ -29,7 +29,7 @@ function parse_optargs
 			f)
 				FOOTER_PATH=$OPTARG;;
 			m)
-				MARKDOWN_RENDERER=$OPTARG;;
+				MD_RENDERER=$OPTARG;;
 			o)
 				OUTPUT_DIR=$OPTARG;;
 			p)
@@ -44,7 +44,7 @@ function set_default_args
 	CSS_PATH=./styles.css
 	FOOTER_PATH=./footer.html
 	HEADER_PATH=./header.html
-	MARKDOWN_RENDERER=pandoc
+	MD_RENDERER=pandoc
 	POSTS_DIR=./posts
 	OUTPUT_DIR=.
 }
@@ -121,7 +121,7 @@ li {}
 
 @media only screen and (max-width: 600px)
 {
-    body {}
+	body {}
 }
 
 code span.al {}
@@ -205,7 +205,7 @@ function make_html_files
 	for md_file in $@; do
 		file_base=`basename $md_file .md`
 		output_file="$OUTPUT_DIR/$file_base.html"
-		append_posts_list $posts | cat $md_file - | $MARKDOWN_RENDERER > $output_file
+		append_posts_list $posts | cat $md_file - | $MD_RENDERER > $output_file
 		cat $HEADER_PATH $output_file $FOOTER_PATH | tee $output_file
 	done
 }
