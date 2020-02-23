@@ -207,15 +207,15 @@ function get_mod_date
 
 function append_posts_list
 {
-	posts_list="\n --- \n"
 	for post in $@; do
 		file_base=`basename $post .md`
 		date=`get_mod_date "$post"`
 		post_title=`grep -m 1 "^# .*" $post | cut -c 3-`
-		post_link="$date – [$post_title]($file_base.html) <br>"
-		posts_list="$posts_list $post_link"
+		post_link="$date – [$post_title]($file_base.html)<br>\n"
+		posts_list="$posts_list$post_link"
 	done
-	echo "$posts_list" | sort -r
+	echo "\n---\n"
+	echo $posts_list | sort -r
 }
 
 
