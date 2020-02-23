@@ -215,7 +215,7 @@ function append_posts_list
 		post_link="$date – [$post_title]($file_base.html) <br>"
 		posts_list="$posts_list $post_link"
 	done
-	echo $posts_list
+	echo "$posts_list" | sort -r
 }
 
 
