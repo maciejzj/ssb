@@ -78,6 +78,8 @@ function echo_footer_template
 {
 	echo \
 '<footer>
+	Created with <a href="https://github.com/maciejzj/ssb">ssb</a> – a simple
+	static blogger.
 </footer>
 </body>
 </html>'
@@ -87,9 +89,9 @@ function echo_footer_template
 function echo_css_template
 {
 	echo \
-'body { max-width: 45em; margin: auto; padding: 1.5em }
-header { }
-footer { }
+'body { max-width: 40em; margin: auto; padding: 1.5em }
+header { font-size: 1.2em; }
+footer { text-align: right; }
 nav { }
 h1 { }
 h2 { }
