@@ -5,7 +5,6 @@ function usage
 	echo \
 		"Usage: $0 [-d|-g|-h|-r] [-c CSS_PATH] [-e HEADER_PATH]" \
 		"[-f FOOTER_PATH] [-m MARKDOWN_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR]"
-	exit 0
 }
 
 
@@ -16,9 +15,11 @@ function parse_optargs
 			d)
 				DISABLE_POSTS=true;;
 			g)
-				gen_template;;
+				gen_template
+				exit 0;;
 			h)
-				usage;;
+				usage
+				exit 0;;
 			r)
 				RECURSE_POSTS=true;;
 			c)
@@ -44,8 +45,8 @@ function set_default_args
 	FOOTER_PATH=./footer.html
 	HEADER_PATH=./header.html
 	MARKDOWN_RENDERER=pandoc
-	OUTPUT_DIR=./
 	POSTS_DIR=./posts
+	OUTPUT_DIR=.
 }
 
 function echo_header_template
@@ -85,15 +86,87 @@ function echo_footer_template
 }
 
 
+function echo_css_template
+{
+	echo \
+'body {}
+nav {}
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+p {}
+a {}
+a:hover {}
+iframe {}
+ul {}
+header {}
+footer {}
+nav {}
+hr {}
+pre code {}
+code {} code a {}
+code a:hover {}
+a code:hover {}
+figure {}
+figcaption {}
+img {}
+video {}
+blockquote {}
+table {}
+th, td {}
+li {}
+
+@media only screen and (max-width: 600px)
+{
+    body {}
+}
+
+code span.al {}
+code span.an {}
+code span.at {}
+code span.bn {}
+code span.bu {}
+code span.cf {}
+code span.ch {}
+code span.cn {}
+code span.co {}
+code span.cv {}
+code span.do {}
+code span.dt {}
+code span.dv {}
+code span.er {}
+code span.ex {}
+code span.fl {}
+code span.fu {}
+code span.im {}
+code span.in {}
+code span.kw {}
+code span.op {}
+code span.ot {}
+code span.pp {}
+code span.sc {}
+code span.ss {}
+code span.st {}
+code span.va {}
+code span.vs {}
+code span.wa {}'
+}
+
+
 function gen_template
 {
 	echo_header_template > ./header.html
 	echo_footer_template > ./footer.html
+	echo_css_template > ./styles.css
 }
 
 
 function get_posts
 {
+	h
 	if [ "$RECURSE_POSTS" = false ]; then
 		DEPTH_LIMITER="-maxdepth 1"
 	fi
@@ -120,7 +193,7 @@ function append_posts_list
 		file_base=`basename $post .md`
 		date=`get_mod_date "$post"`
 		post_title=`grep -m 1 "^# .*" $post | cut -c 3-`
-		post_link="$date — [$post_title]($file_base.html) <br>"
+		post_link="$date - [$post_title]($file_base.html) <br>"
 		posts_list="$posts_list $post_link"
 	done
 	echo $posts_list
@@ -131,8 +204,9 @@ function make_html_files
 {
 	for md_file in $@; do
 		file_base=`basename $md_file .md`
-		append_posts_list $posts | cat $md_file - | $MARKDOWN_RENDERER > $file_base.html
-		cat $HEADER_PATH $file_base.html $FOOTER_PATH | tee $file_base.html
+		output_file="$OUTPUT_DIR/$file_base.html"
+		append_posts_list $posts | cat $md_file - | $MARKDOWN_RENDERER > $output_file
+		cat $HEADER_PATH $output_file $FOOTER_PATH | tee $output_file
 	done
 }
 
@@ -142,6 +216,7 @@ parse_optargs $@
 shift `expr $OPTIND - 1`
 
 pages="$@"
+[ -z "$pages" ] && echo No markdown pages given to render && exit 1
 posts=`get_posts`
 md_files="$pages $posts"
 
