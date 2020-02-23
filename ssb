@@ -102,26 +102,47 @@ function get_posts
 }
 
 
+function get_mod_date
+{
+	case `uname` in
+		Linux)
+			stat -c %y "$1" | cut -d ' ' -f 1;;
+		Darwin|*BSD)
+			stat -t "%Y-%m-%d" -f "%Sm" "$1";;
+	esac
+}
+
+
 function append_posts_list
 {
+	posts_list="\n --- \n"
 	for post in $@; do
+		file_base=`basename $post .md`
+		date=`get_mod_date "$post"`
 		post_title=`grep -m 1 "^# .*" $post | cut -c 3-`
-		posts_list="$posts_list $post_title \n"
+		post_link="$date — [$post_title]($file_base.html) <br>"
+		posts_list="$posts_list $post_link"
 	done
 	echo $posts_list
+}
+
+
+function make_html_files
+{
+	for md_file in $@; do
+		file_base=`basename $md_file .md`
+		append_posts_list $posts | cat $md_file - | $MARKDOWN_RENDERER > $file_base.html
+		cat $HEADER_PATH $file_base.html $FOOTER_PATH | tee $file_base.html
+	done
 }
 
 
 set_default_args
 parse_optargs $@
 shift `expr $OPTIND - 1`
+
 pages="$@"
 posts=`get_posts`
-
 md_files="$pages $posts"
 
-for md_file in $md_files; do
-	file_base=`basename $md_file .md`
-	append_posts_list $posts | cat $md_file - | $MARKDOWN_RENDERER > $file_base.html
-	cat $HEADER_PATH $file_base.html $FOOTER_PATH | tee $file_base.html
-done
+make_html_files $md_files
