@@ -46,7 +46,7 @@ the task.
 
 * Ssb is a single POSIX compliant script that requires only a markdown renderer
   to create blogs.
-* It is not a **real framework**, just a hackable script to automate blogging
+* It is not a *real framework*, just a hackable script to automate blogging
   and save your time.
 * No tags, no artifacts, no javascript, no learning, no lengthy setup.
 * If you want a simple and effortless blogging engine ssb is perfect for you,
