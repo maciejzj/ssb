@@ -42,6 +42,7 @@ function set_default_args
 	FOOTER_PATH=./footer.html
 	HEADER_PATH=./header.html
 	MD_RENDERER=pandoc
+	DISABLE_POSTS=false
 	POSTS_DIR=./posts
 	OUTPUT_DIR=.
 }
@@ -211,7 +212,7 @@ function append_posts_list
 		file_base=`basename $post .md`
 		date=`get_mod_date "$post"`
 		post_title=`grep -m 1 "^# .*" $post | cut -c 3-`
-		post_link="$date - [$post_title]($file_base.html) <br>"
+		post_link="$date – [$post_title]($file_base.html) <br>"
 		posts_list="$posts_list $post_link"
 	done
 	echo $posts_list
