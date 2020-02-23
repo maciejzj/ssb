@@ -10,7 +10,7 @@ function usage
 
 function parse_optargs
 {
-	while getopts "dghrc:e:f:m:o:p:" opt; do
+	while getopts "dghre:f:m:o:p:" opt; do
 		case $opt in
 			d)
 				DISABLE_POSTS=true;;
