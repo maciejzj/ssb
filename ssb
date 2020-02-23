@@ -101,17 +101,23 @@ h5 { }
 h6 { }
 p { }
 a { }
-a:hover { }
+li { }
 ul { }
+dl { }
+dt { }
+dd { }
 hr { }
 figure { }
 figcaption { }
 img { }
 video { }
-blockquote { }
 table { }
 th, td { }
-li { }
+blockquote { }
+
+img, video { width: 100%; }
+pre { width: 100%; overflow-x: auto; }
+table{ max-width: 100%; overflow-x: auto; display: block; }
 
 @media only screen and (max-width: 600px)
 {
