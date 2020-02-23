@@ -3,8 +3,8 @@
 function usage
 {
 	echo \
-		"Usage: $0 [-d|-g|-h|-r] [-c CSS_PATH] [-e HEADER_PATH]" \
-		"[-f FOOTER_PATH] [-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR]"
+		"Usage: $0 [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH]" \
+		"[-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR]"
 }
 
 
@@ -22,8 +22,6 @@ function parse_optargs
 				exit 0;;
 			r)
 				RECURSE_POSTS=true;;
-			c)
-				CSS_PATH=$OPTARG;;
 			e)
 				HEADER_PATH=$OPTARG;;
 			f)
@@ -41,7 +39,6 @@ function parse_optargs
 
 function set_default_args
 {
-	CSS_PATH=./styles.css
 	FOOTER_PATH=./footer.html
 	HEADER_PATH=./header.html
 	MD_RENDERER=pandoc
@@ -60,7 +57,7 @@ function echo_header_template
 	<title>Title</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
@@ -89,70 +86,92 @@ function echo_footer_template
 function echo_css_template
 {
 	echo \
-'body {}
-nav {}
-h1 {}
-h2 {}
-h3 {}
-h4 {}
-h5 {}
-h6 {}
-p {}
-a {}
-a:hover {}
-iframe {}
-ul {}
-header {}
-footer {}
-nav {}
-hr {}
-pre code {}
-code {} code a {}
-code a:hover {}
-a code:hover {}
-figure {}
-figcaption {}
-img {}
-video {}
-blockquote {}
-table {}
-th, td {}
-li {}
+'body { }
+header { }
+footer { }
+nav { }
+h1 { }
+h2 { }
+h3 { }
+h4 { }
+h5 { }
+h6 { }
+p { }
+a { }
+a:hover { }
+ul { }
+hr { }
+figure { }
+figcaption { }
+img { }
+video { }
+blockquote { }
+table { }
+th, td { }
+li { }
 
 @media only screen and (max-width: 600px)
 {
-	body {}
+	body { }
 }
 
-code span.al {}
-code span.an {}
-code span.at {}
-code span.bn {}
-code span.bu {}
-code span.cf {}
-code span.ch {}
-code span.cn {}
-code span.co {}
-code span.cv {}
-code span.do {}
-code span.dt {}
-code span.dv {}
-code span.er {}
-code span.ex {}
-code span.fl {}
-code span.fu {}
-code span.im {}
-code span.in {}
-code span.kw {}
-code span.op {}
-code span.ot {}
-code span.pp {}
-code span.sc {}
-code span.ss {}
-code span.st {}
-code span.va {}
-code span.vs {}
-code span.wa {}'
+code span.al { color: #ff0000; font-weight: bold; }
+/* Annotation */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; }
+/* Attribute */
+code span.at { color: #7d9029; }
+/* BaseN */
+code span.bn { color: #40a070; }
+/* BuiltIn */
+code span.bu { }
+/* ControlFlow */
+code span.cf { color: #007020; font-weight: bold; }
+/* Char */
+code span.ch { color: #4070a0; }
+/* Constant */
+code span.cn { color: #880000; }
+/* Comment */
+code span.co { color: #60a0b0; font-style: italic; }
+/* CommentVar */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; }
+/* Documentation */
+code span.do { color: #ba2121; font-style: italic; }
+/* DataType */
+code span.dt { color: #902000; }
+/* DecVal */
+code span.dv { color: #40a070; }
+/* Error */
+code span.er { color: #ff0000; font-weight: bold; }
+/* Extension */
+code span.ex { }
+/* Float */
+code span.fl { color: #40a070; }
+/* Function */
+code span.fu { color: #06287e; }
+/* Import */
+code span.im { }
+/* Information */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; }
+/* Keyword */
+code span.kw { color: #007020; font-weight: bold; }
+/* Operator */
+code span.op { color: #666666; }
+/* Other */
+code span.ot { color: #007020; }
+/* Preprocessor */
+code span.pp { color: #bc7a00; }
+/* SpecialChar */
+code span.sc { color: #4070a0; }
+/* SpecialString */
+code span.ss { color: #bb6688; }
+/* String */
+code span.st { color: #4070a0; }
+/* Variable */
+code span.va { color: #19177c; }
+/* VerbatimString */
+code span.vs { color: #4070a0; }
+/* Warning */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }'
 }
 
 
