@@ -166,7 +166,6 @@ function gen_template
 
 function get_posts
 {
-	h
 	if [ "$RECURSE_POSTS" = false ]; then
 		DEPTH_LIMITER="-maxdepth 1"
 	fi
@@ -217,7 +216,7 @@ shift `expr $OPTIND - 1`
 
 pages="$@"
 [ -z "$pages" ] && echo No markdown pages given to render && exit 1
-posts=`get_posts`
+[ $DISABLE_POSTS != true ] && posts=`get_posts`
 md_files="$pages $posts"
 
 make_html_files $md_files
