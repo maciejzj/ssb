@@ -56,10 +56,14 @@ post.
 * If you want a simple and effortless blogging engine ssb is perfect for you,
   whether you want something with more features you can hack it, or use
   frameworks like Jekyll or Hugo.
-  
+
 ## Help
+
 ```
 ./ssb -h
 Usage: ./ssb [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH] [-m MD_RENDERER]
                            [-o OUTPUT_DIR] [-p POSTS_DIR]
 ```
+
+Stylesheets for theming can be found
+[here](https://github.com/maciejzj/ssb-themes).
