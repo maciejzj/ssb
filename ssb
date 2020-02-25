@@ -103,6 +103,7 @@ p { }
 a { }
 li { }
 ul { }
+ol { }
 dl { }
 dt { }
 dd { }
@@ -112,11 +113,14 @@ figcaption { }
 img { }
 video { }
 table { }
-th, td { }
+th { }
+tr { }
+td { }
 blockquote { }
+pre { }
 
 img, video { width: 100%; }
-pre { width: 100%; overflow-x: auto; }
+pre { max-width: 100%; overflow-x: auto; }
 table{ max-width: 100%; overflow-x: auto; display: block; }
 
 @media only screen and (max-width: 600px)
