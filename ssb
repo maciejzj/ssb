@@ -64,9 +64,8 @@ function echo_header_template
 <body>
 <header>
 <nav>
-	<strong>Title</strong>&nbsp;
-	<a href="./index.html">home</a>&nbsp;
-	-&nbsp;
+	<strong>Title</strong>
+	<a href="./index.html">home</a>
 	<a href="mailto:">email</a>
 </nav>
 </header>
