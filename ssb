@@ -234,9 +234,11 @@ function make_html_files
 {
 	for md_file in $@; do
 		file_base=`basename $md_file .md`
-		output_file="$OUTPUT_DIR/$file_base.html"
-		append_posts_list $posts | cat $md_file - | $MD_RENDERER > $output_file
-		cat $HEADER_PATH $output_file $FOOTER_PATH | tee $output_file
+		output_file="$OUTPUT_DIR/${file_base}.html"
+		tempf=`mktemp`
+		trap "rm $tempf" 0 2 3 15
+		append_posts_list $posts | cat $md_file - | $MD_RENDERER > $tempf
+	    cat $HEADER_PATH $tempf $FOOTER_PATH | tee $output_file
 	done
 }
 
