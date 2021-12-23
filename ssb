@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -euo pipefail
+
 function usage
 {
 	echo \
@@ -39,12 +41,14 @@ function parse_optargs
 
 function set_default_args
 {
-	FOOTER_PATH=./footer.html
-	HEADER_PATH=./header.html
-	MD_RENDERER=pandoc
 	DISABLE_POSTS=false
-	POSTS_DIR=./posts
+	RECURSE_POSTS=false
+
+	HEADER_PATH=./header.html
+	FOOTER_PATH=./footer.html
+	MD_RENDERER=pandoc
 	OUTPUT_DIR=.
+	POSTS_DIR=./posts
 }
 
 function echo_header_template
@@ -199,6 +203,8 @@ function get_posts
 {
 	if [ "$RECURSE_POSTS" = false ]; then
 		DEPTH_LIMITER="-maxdepth 1"
+	else
+		DEPTH_LIMITER=""
 	fi
 
 	find $POSTS_DIR $DEPTH_LIMITER -type f -name "*.md"
@@ -218,6 +224,7 @@ function get_mod_date
 
 function append_posts_list
 {
+	posts_list=""
 	for post in $@; do
 		file_base=`basename $post .md`
 		date=`get_mod_date "$post"`
@@ -247,6 +254,7 @@ set_default_args
 parse_optargs $@
 shift `expr $OPTIND - 1`
 
+posts=""
 pages="$@"
 [ -z "$pages" ] && echo No markdown pages given to render && exit 1
 [ $DISABLE_POSTS != true ] && posts=`get_posts`
