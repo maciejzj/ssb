@@ -5,8 +5,27 @@ set -euo pipefail
 function usage
 {
 	echo \
-		"Usage: $0 [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH]" \
-		"[-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR]"
+"ssb - simple static blogger.
+
+Translates input markdown files to html pages. Attaches html header and \
+footer to each output. Files from the posts directory are appended to a \
+blog list at the end of each html.
+
+Usage: $0 [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH]\
+[-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR] <file ...>
+
+Options:
+ -d Don't attach posts list to each html file.\n\
+ -g Generate html templates for header, footer and stylesheet.
+ -h Show this help message.
+ -r Recurse the posts directory.
+
+ -e HEADER_PATH Path to a header html file (header.html by default).
+ -f FOOTER_PATH Path to a footer html file (footer.html by default).
+ -m MD_RENDERER Markdown renderer command name. Must be able to read
+    markdown form stdin and output html to stdout (pandoc by default).
+ -o OUTPUT_DIR Output directory for html files (. by default).
+ -p POSTS_DIR Path to a directory with markdown posts (posts by default)."
 }
 
 
