@@ -43,7 +43,7 @@ post.
    posts and footer to each file.
 6. The timestamps near posts titles are generated from modification dates of
    Markdown files. 
-   If you wish to change them use the `touch` command.
+   If you wish to change them use the `touch` command (`touch -t YYMMDDhhmm`).
 7. Publish your blog.
 
 ## Features and non-features
