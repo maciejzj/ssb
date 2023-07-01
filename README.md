@@ -60,21 +60,26 @@ post.
 ## Help
 
 ```
-$ ssb -h 
 ssb - simple static blogger.
 
 Translates input markdown files to html pages. Attaches html header and footer
 to each output. Files from the posts directory are appended to a blog list at
 the end of each html.
 
-Usage: ../ssb/ssb [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH][-m MD_RENDERER]
-                                [-o OUTPUT_DIR] [-p POSTS_DIR] <file ...>
+Usage: ssb [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH][-m MD_RENDERER]
+                         [-o OUTPUT_DIR] [-p POSTS_DIR] <MARKDOWN_FILES ...>
+
+Positional arguments:
+ MARKDOWN_FILES Paths to arbitrary number of markdown files that will be
+ translated into html files but not appended to the posts list (but will still
+ display it at the bottom). It is intended to pass index.md here.
 
 Options:
  -d Don't attach posts list to each html file.
  -g Generate html templates for header, footer and stylesheet.
  -h Show this help message.
  -r Recurse the posts directory.
+ -v Be verbose (print each command being executed).
 
  -e HEADER_PATH Path to a header html file (header.html by default).
  -f FOOTER_PATH Path to a footer html file (footer.html by default).
@@ -88,3 +93,28 @@ Options:
 
 Stylesheets for theming can be found
 [here](https://github.com/maciejzj/ssb-themes).
+
+You can grab the following Makefile starter to use ssb in a more comfortable
+way:
+
+```makefile
+markdown_pages := index.md
+posts_dir := posts
+
+markdown_posts := $(wildcard $(posts_dir)/*.md)
+
+# Main markdown pages
+generated_files := $(markdown_pages:%.md=%.html)
+# Append posts pages
+generated_files += $(patsubst $(posts_dir)/%.md,%.html,$(markdown_posts))
+
+.DEFAULT: compile
+
+compile: $(markdown_pages) $(markdown_posts)
+	../ssb/ssb -p $(posts_dir) $(markdown_pages)
+
+.PHONY: clean
+
+clean:
+	rm $(generated_files)
+```
