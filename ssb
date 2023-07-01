@@ -91,6 +91,7 @@ set_default_args()
 	POSTS_DIR=./posts
 }
 
+
 echo_header_template()
 {
 	echo \
