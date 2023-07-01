@@ -1,37 +1,50 @@
 #!/bin/sh
+# This uses barebones POSIX sh so we disable warning about `expr` being
+# antiquated.
+# shellcheck disable=SC2003
+# We also ignore SC2124, and SC2068 in specific lines to stick with
+# space-separated iterables.
 
-set -euo pipefail
+set -eu
 
-function usage
+
+usage()
 {
-	echo \
+	printf \
 "ssb - simple static blogger.
 
 Translates input markdown files to html pages. Attaches html header and \
 footer to each output. Files from the posts directory are appended to a \
 blog list at the end of each html.
 
-Usage: $0 [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH]\
-[-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR] <file ...>
+Usage: ssb [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH]\
+[-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR] <MARKDOWN_FILES ...>
+
+Positional arguments:
+ MARKDOWN_FILES Paths to arbitrary number of markdown files that will be
+ translated into html files but not appended to the posts list (but will still
+ display it at the bottom). It is intended to pass index.md here.
 
 Options:
  -d Don't attach posts list to each html file.\n\
  -g Generate html templates for header, footer and stylesheet.
  -h Show this help message.
  -r Recurse the posts directory.
+ -v Be verbose (print each command being executed).
 
  -e HEADER_PATH Path to a header html file (header.html by default).
  -f FOOTER_PATH Path to a footer html file (footer.html by default).
  -m MD_RENDERER Markdown renderer command name. Must be able to read
     markdown form stdin and output html to stdout (pandoc by default).
  -o OUTPUT_DIR Output directory for html files (. by default).
- -p POSTS_DIR Path to a directory with markdown posts (posts by default)."
+ -p POSTS_DIR Path to a directory with markdown posts (posts by default).
+"
 }
 
 
-function parse_optargs
+parse_optargs()
 {
-	while getopts "dghre:f:m:o:p:" opt; do
+	while getopts "dghre:f:m:o:p:v:" opt; do
 		case $opt in
 			d)
 				DISABLE_POSTS=true;;
@@ -43,6 +56,8 @@ function parse_optargs
 				exit 0;;
 			r)
 				RECURSE_POSTS=true;;
+			v)
+				VERBOSE=true;;
 			e)
 				HEADER_PATH=$OPTARG;;
 			f)
@@ -53,15 +68,21 @@ function parse_optargs
 				OUTPUT_DIR=$OPTARG;;
 			p)
 				POSTS_DIR=$OPTARG;;
+			*)
+				printf "Received invalid argument\n\n" 1>&2
+				usage	
+				# Exit code: EINVAL (invalid argument)
+				exit 22
 		esac
 	done
 }
 
 
-function set_default_args
+set_default_args()
 {
 	DISABLE_POSTS=false
 	RECURSE_POSTS=false
+	VERBOSE=false
 
 	HEADER_PATH=./header.html
 	FOOTER_PATH=./footer.html
@@ -70,7 +91,7 @@ function set_default_args
 	POSTS_DIR=./posts
 }
 
-function echo_header_template
+echo_header_template()
 {
 	echo \
 '<!DOCTYPE html>
@@ -86,8 +107,8 @@ function echo_header_template
 
 <body>
 <header>
+<strong>Title</strong>
 <nav>
-	<strong>Title</strong>
 	<a href="./index.html">home</a>
 	<a href="mailto:">email</a>
 </nav>
@@ -96,7 +117,7 @@ function echo_header_template
 }
 
 
-function echo_footer_template
+echo_footer_template()
 {
 	echo \
 '<footer>
@@ -108,7 +129,7 @@ function echo_footer_template
 }
 
 
-function echo_css_template
+echo_css_template()
 {
 	echo \
 'body { max-width: 40em; margin: auto; padding: 1.5em }
@@ -143,7 +164,7 @@ pre { }
 
 img, video { width: 100%; }
 pre { max-width: 100%; overflow-x: auto; }
-table{ max-width: 100%; overflow-x: auto; display: block; }
+table { max-width: 100%; overflow-x: auto; display: block; border-collapse: collapse; }
 
 @media only screen and (max-width: 600px)
 {
@@ -210,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }'
 }
 
 
-function gen_template
+gen_template()
 {
 	echo_header_template > ./header.html
 	echo_footer_template > ./footer.html
@@ -218,21 +239,23 @@ function gen_template
 }
 
 
-function get_posts
+get_posts()
 {
 	if [ "$RECURSE_POSTS" = false ]; then
-		DEPTH_LIMITER="-maxdepth 1"
+		MAXDEPTH_OPT="-maxdepth"
+		DEPTH_LIMITER="1"
 	else
+		MAXDEPTH_OPT=""
 		DEPTH_LIMITER=""
 	fi
-
-	find $POSTS_DIR $DEPTH_LIMITER -type f -name "*.md"
+	
+	find "$POSTS_DIR" "$MAXDEPTH_OPT" "$DEPTH_LIMITER" -type f -name "*.md"
 }
 
 
-function get_mod_date
+get_mod_date()
 {
-	case `uname` in
+	case $(uname) in
 		Linux)
 			stat -c %y "$1" | cut -d ' ' -f 1;;
 		Darwin|*BSD)
@@ -241,42 +264,51 @@ function get_mod_date
 }
 
 
-function append_posts_list
+append_posts_list()
 {
 	posts_list=""
+	# shellcheck disable=SC2068
 	for post in $@; do
-		file_base=`basename $post .md`
-		date=`get_mod_date "$post"`
-		post_title=`grep -m 1 "^# .*" $post | cut -c 3-`
+		file_base="$(basename "$post" .md)"
+		date=$(get_mod_date "$post")
+		post_title="$(grep -m 1 "^# .*" "$post" | cut -c 3-)"
 		post_link="$date – [$post_title]($file_base.html)<br>\n"
 		posts_list="$posts_list$post_link"
 	done
-	echo "\n---\n"
-	echo $posts_list | sort -r
+	printf "\n---\n"
+	echo "$posts_list" | sort -r
 }
 
 
-function make_html_files
+make_html_files()
 {
+	# shellcheck disable=SC2068
 	for md_file in $@; do
-		file_base=`basename $md_file .md`
+		file_base=$(basename "$md_file" .md)
 		output_file="$OUTPUT_DIR/${file_base}.html"
-		tempf=`mktemp`
+		tempf=$(mktemp)
+		# Ignore the suggestion because tempf can be expanded immediately
+		# shellcheck disable=SC2064
 		trap "rm $tempf" 0 2 3 15
-		append_posts_list $posts | cat $md_file - | $MD_RENDERER > $tempf
-	    cat $HEADER_PATH $tempf $FOOTER_PATH | tee $output_file
+		append_posts_list "$posts" | cat "$md_file" - | "$MD_RENDERER" > "$tempf"
+		cat "$HEADER_PATH" "$tempf" "$FOOTER_PATH" > "$output_file"
 	done
 }
 
 
 set_default_args
-parse_optargs $@
-shift `expr $OPTIND - 1`
+parse_optargs "$@"
+shift "$(expr "$OPTIND" - 1)"
+
+if "$VERBOSE"; then
+	set -x
+fi
 
 posts=""
+# shellcheck disable=SC2124
 pages="$@"
 [ -z "$pages" ] && echo No markdown pages given to render && exit 1
-[ $DISABLE_POSTS != true ] && posts=`get_posts`
+[ $DISABLE_POSTS != true ] && posts="$(get_posts)"
 md_files="$pages $posts"
 
-make_html_files $md_files
+make_html_files "$md_files"
