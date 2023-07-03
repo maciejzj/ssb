@@ -13,8 +13,8 @@ usage()
 	printf \
 "ssb - simple static blogger.
 
-Translates input markdown files to html pages. Attaches html header and \
-footer to each output. Files from the posts directory are appended to a \
+Translates input markdown files to html pages. Attaches html header and
+footer to each output. Files from the posts directory are appended to a
 blog list at the end of each html.
 
 Usage: ssb [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH]\
@@ -38,6 +38,15 @@ Options:
     markdown form stdin and output html to stdout (pandoc by default).
  -o OUTPUT_DIR Output directory for html files (. by default).
  -p POSTS_DIR Path to a directory with markdown posts (posts by default).
+
+Usage tips:
+
+The timestamps near posts titles are generated from modification dates of
+Markdown files.
+
+If you wish to change them use the touch command (touch -t YYMMDDhhmm).
+
+Credentials: https://github.com/maciejzj/ssb
 "
 }
 
