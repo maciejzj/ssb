@@ -31,7 +31,7 @@ Options:
   -h Show this help message.
   -r Recurse the posts directory.
   -v Be verbose (print each command being executed).
- 
+
   -e HEADER_PATH Path to a header html file (header.html by default).
   -f FOOTER_PATH Path to a footer html file (footer.html by default).
   -m MD_RENDERER Markdown renderer command name. Must be able to read
@@ -79,7 +79,7 @@ parse_optargs()
 				POSTS_DIR=$OPTARG;;
 			*)
 				printf "Received invalid argument\n\n" 1>&2
-				usage	
+				usage
 				# Exit code: EINVAL (invalid argument)
 				exit 22
 		esac
@@ -258,7 +258,7 @@ get_posts()
 		MAXDEPTH_OPT=""
 		DEPTH_LIMITER=""
 	fi
-	
+
 	find "$POSTS_DIR" "$MAXDEPTH_OPT" "$DEPTH_LIMITER" -type f -name "*.md"
 }
 
