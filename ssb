@@ -21,23 +21,23 @@ Usage: ssb [-d|-g|-h|-r] [-e HEADER_PATH] [-f FOOTER_PATH]\
 [-m MD_RENDERER] [-o OUTPUT_DIR] [-p POSTS_DIR] <MARKDOWN_FILES ...>
 
 Positional arguments:
- MARKDOWN_FILES Paths to arbitrary number of markdown files that will be
- translated into html files but not appended to the posts list (but will still
- display it at the bottom). It is intended to pass index.md here.
+  MARKDOWN_FILES - Paths to arbitrary number of markdown files that will be
+  translated into html files but not appended to the posts list (but will still
+  display it at the bottom). It is intended to pass index.md here.
 
 Options:
- -d Don't attach posts list to each html file.\n\
- -g Generate html templates for header, footer and stylesheet.
- -h Show this help message.
- -r Recurse the posts directory.
- -v Be verbose (print each command being executed).
-
- -e HEADER_PATH Path to a header html file (header.html by default).
- -f FOOTER_PATH Path to a footer html file (footer.html by default).
- -m MD_RENDERER Markdown renderer command name. Must be able to read
-    markdown form stdin and output html to stdout (pandoc by default).
- -o OUTPUT_DIR Output directory for html files (. by default).
- -p POSTS_DIR Path to a directory with markdown posts (posts by default).
+  -d Don't attach posts list to each html file.\n\
+  -g Generate html templates for header, footer and stylesheet.
+  -h Show this help message.
+  -r Recurse the posts directory.
+  -v Be verbose (print each command being executed).
+ 
+  -e HEADER_PATH Path to a header html file (header.html by default).
+  -f FOOTER_PATH Path to a footer html file (footer.html by default).
+  -m MD_RENDERER Markdown renderer command name. Must be able to read
+     markdown form stdin and output html to stdout (pandoc by default).
+  -o OUTPUT_DIR Output directory for html files (. by default).
+  -p POSTS_DIR Path to a directory with markdown posts (posts by default).
 
 Usage tips:
 
