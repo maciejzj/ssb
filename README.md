@@ -140,5 +140,5 @@ clean:
 
 ## Acknowledgements
 
-Thanks to [Bartosz Pacia](https://github.com/bartekpacia) for an idea for
+Thanks to [Bartek Pacia](https://github.com/bartekpacia) for an idea for
 homebrew installation and initial package setup.
