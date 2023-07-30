@@ -129,7 +129,7 @@ generated_files += $(foreach post,$(markdown_posts),$(patsubst $(posts_dir)/%.md
 
 compile: $(generated_files)
 
-$(generated_files): $(markdown_pages) $(markdown_posts)
+$(generated_files): header.html footer.html $(markdown_pages) $(markdown_posts)
 	ssb -p $(posts_dir) -o $(output_dir) $(markdown_pages)
 
 .PHONY: clean
