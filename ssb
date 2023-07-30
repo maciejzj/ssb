@@ -148,6 +148,7 @@ echo_css_template()
 'body { max-width: 40em; margin: auto; padding: 1.5em }
 header { font-size: 1.2em; }
 footer { text-align: right; }
+main { }
 nav { }
 h1 { }
 h2 { }
