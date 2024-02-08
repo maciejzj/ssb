@@ -123,6 +123,7 @@ echo_header_template()
 	<a href="mailto:">email</a>
 </nav>
 </header>
+<main>
 '
 }
 
@@ -130,7 +131,9 @@ echo_header_template()
 echo_footer_template()
 {
 	echo \
-'<footer>
+'
+</main>
+<footer>
 	Created with <a href="https://github.com/maciejzj/ssb">ssb</a> – a simple
 	static blogger.
 </footer>
@@ -145,6 +148,7 @@ echo_css_template()
 'body { max-width: 40em; margin: auto; padding: 1.5em }
 header { font-size: 1.2em; }
 footer { text-align: right; }
+main { }
 nav { }
 h1 { }
 h2 { }
