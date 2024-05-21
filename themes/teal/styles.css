@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap');
+
+:root {
+	--teal-background: rgb(62, 117, 108);
+	--teal-foreground: rgb(105, 224, 205);
+	--teal-pale: rgb(63, 112, 104);
+	--teal-strong: rgb(10, 65, 50);
+}
+
+body {
+	background-color: var(--teal-background);
+
+	color: var(--teal-foreground);
+	font-family: -apple-system, "BlinkMacSystemFont",
+		"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+	max-width: 40em;
+	margin: auto;
+	padding: 2em;
+}
+
+header {
+	font-size: 1.1em;
+	margin: 2em 0em;
+}
+
+header h1 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 3em;
+	font-weight: normal;
+	margin: 0.5em 0em;
+}
+
+nav a:not(:last-child) {
+	margin-right: 0.25em;
+}
+
+footer {
+	margin-top: 1.5em;
+	text-align: right;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Times New Roman", Times, serif;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 2.5em;
+}
+
+h2 {
+	font-size: 2.25em;
+}
+
+h3 {
+	font-size: 2em;
+}
+
+h4 {
+	font-size: 1.75em;
+}
+
+h5 {
+	font-size: 1.5em;
+}
+
+h6 {
+	font-size: 1.25em;
+}
+
+p {
+	line-height: 1.25em;
+	hyphens: auto;
+	text-justify: inter-word;
+	overflow-wrap: break-word;
+	text-align: justify;
+}
+
+a {
+	color: var(--teal-foreground);
+}
+
+li {
+	line-height: 1.5em;
+}
+
+ul {
+	padding-left: 3em;
+}
+
+ol {
+	padding-left: 3em;
+}
+
+dl {
+	line-height: 1.5em;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	font-style: italic;
+}
+
+hr {
+	border: solid 0.075em var(--teal-strong);
+	margin: 1.5em 0em;
+}
+
+figure {
+	color: var(--teal-strong);
+	margin: 0.5em 0;
+	padding: 0.5em;
+}
+
+figcaption {
+	color: var(--teal-strong);
+	padding-top: 0.5em;
+	font-style: italic;
+}
+
+table {
+	max-width: 100%;
+	overflow-x: auto;
+	display: block;
+	border-collapse: collapse;
+}
+
+tr {
+	background-color: var(--teal-pale);
+}
+
+th {
+	font-weight: bold;
+	border: 0.15em solid var(--teal-strong);
+	padding: 0.5em 1em;
+}
+
+td {
+	border: 0.15em solid var(--teal-strong);
+	padding: 0.5em 1em;
+}
+
+blockquote {
+	padding: 0 1em;
+	color: var(--teal-strong);
+	border-left: 0.25em solid var(--teal-strong);
+}
+
+pre {
+	background-color: var(--teal-pale);
+	border: 0.2em solid var(--teal-strong);
+	padding: 0.5em 0.8em;
+
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+img, video {
+	width: 100%;
+}
+
+@media only screen and (max-width: 600px)
+{
+	body {
+		font-size: 0.9em;
+	}
+
+	nav {
+		display: flex;
+		flex-direction: column;
+	}
+
+	nav a:not(:last-child) {
+		margin-bottom: 0.5em;
+	}
+}

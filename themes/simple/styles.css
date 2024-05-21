@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap');
+
+:root {
+	--grey: rgb(191, 191, 191);
+	--dark-grey: rgb(100, 100, 100);
+	--light-grey: rgb(249, 249, 249);
+	--blue-interactive: rgb(65, 74, 240);
+}
+
+
+body {
+	font-family: -apple-system, "BlinkMacSystemFont",
+		"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+	max-width: 40em;
+	margin: auto;
+	padding: 1.5em;
+}
+
+header {
+	font-size: 1.1em;
+	margin: 2em 0em;
+}
+
+
+nav {
+	margin-bottom: 1.5em;
+	padding-bottom: 0.5em;
+}
+
+nav a:not(:last-child) {
+	margin-right: 0.25em;
+}
+
+footer {
+	margin-top: 1.5em;
+	text-align: right;
+}
+
+p {
+	line-height: 1.5em;
+	text-align: justify;
+	hyphens: auto;
+	text-justify: inter-word;
+	overflow-wrap: break-word;
+	margin: 0.5em 0 0.5em 0;
+}
+
+a {
+	color: var(--blue-interactive);
+	text-decoration-thickness: 0.08em;
+}
+
+li {
+	line-height: 1.5em;
+}
+
+ul {
+	padding-left: 3em;
+}
+
+ol {
+	padding-left: 3em;
+}
+
+dl {
+	line-height: 1.5em;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	font-style: italic;
+}
+
+hr {
+	color: var(--grey);
+	border: solid 0.05em;
+	margin: 1.5em 0em;
+}
+
+figure {
+	color: var(--dark-grey);
+	margin: 0.5em 0;
+	padding: 0.5em;
+}
+
+figcaption {
+	padding-top: 0.5em;
+	font-style: italic;
+}
+
+table {
+	max-width: 100%;
+	overflow-x: auto;
+	display: block;
+	border-collapse: collapse;
+}
+
+tr {
+	background-color: white;
+}
+
+tr:nth-child(2n) {
+	background-color: var(--light-grey);
+}
+
+th {
+	font-weight: bold;
+	border: 0.08em solid var(--grey);
+	padding: 0.5em 1em;
+}
+
+td {
+	border: 0.08em solid var(--grey);
+	padding: 0.5em 1em;
+}
+
+blockquote {
+	padding: 0 1em;
+	color: var(--dark-grey);
+	border-left: 0.25em solid var(--grey);
+}
+
+pre {
+	background-color: var(--light-grey);
+	border: 0.1em solid var(--grey);
+	padding: 0.5em 0.8em;
+	border-radius: 0.2em;
+
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+img,
+video {
+	width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+	body {
+		font-size: 0.9em;
+	}
+
+	nav {
+		display: flex;
+		flex-direction: column;
+	}
+
+	nav a:not(:last-child) {
+		margin-bottom: 0.5em;
+	}
+}
+
+code span.al {
+	color: #ff0000;
+	font-weight: bold;
+}
+
+/* Annotation */
+code span.an {
+	color: #60a0b0;
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* Attribute */
+code span.at {
+	color: #7d9029;
+}
+
+/* BaseN */
+code span.bn {
+	color: #40a070;
+}
+
+/* BuiltIn */
+code span.bu {}
+
+/* ControlFlow */
+code span.cf {
+	color: #007020;
+	font-weight: bold;
+}
+
+/* Char */
+code span.ch {
+	color: #4070a0;
+}
+
+/* Constant */
+code span.cn {
+	color: #880000;
+}
+
+/* Comment */
+code span.co {
+	color: #60a0b0;
+	font-style: italic;
+}
+
+/* CommentVar */
+code span.cv {
+	color: #60a0b0;
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* Documentation */
+code span.do {
+	color: #ba2121;
+	font-style: italic;
+}
+
+/* DataType */
+code span.dt {
+	color: #902000;
+}
+
+/* DecVal */
+code span.dv {
+	color: #40a070;
+}
+
+/* Error */
+code span.er {
+	color: #ff0000;
+	font-weight: bold;
+}
+
+/* Extension */
+code span.ex {}
+
+/* Float */
+code span.fl {
+	color: #40a070;
+}
+
+/* Function */
+code span.fu {
+	color: #06287e;
+}
+
+/* Import */
+code span.im {}
+
+/* Information */
+code span.in {
+	color: #60a0b0;
+	font-weight: bold;
+	font-style: italic;
+}
+
+/* Keyword */
+code span.kw {
+	color: #007020;
+	font-weight: bold;
+}
+
+/* Operator */
+code span.op {
+	color: #666666;
+}
+
+/* Other */
+code span.ot {
+	color: #007020;
+}
+
+/* Preprocessor */
+code span.pp {
+	color: #bc7a00;
+}
+
+/* SpecialChar */
+code span.sc {
+	color: #4070a0;
+}
+
+/* SpecialString */
+code span.ss {
+	color: #bb6688;
+}
+
+/* String */
+code span.st {
+	color: #4070a0;
+}
+
+/* Variable */
+code span.va {
+	color: #19177c;
+}
+
+/* VerbatimString */
+code span.vs {
+	color: #4070a0;
+}
+
+/* Warning */
+code span.wa {
+	color: #60a0b0;
+	font-weight: bold;
+	font-style: italic;
+}

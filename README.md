@@ -106,8 +106,9 @@ Credentials: https://github.com/maciejzj/ssb
 
 ## Other tips
 
-Stylesheets for theming can be found
-[here](https://github.com/maciejzj/ssb-themes).
+Stylesheets for theming can be found inside the `themes` directory. The path to
+a stylesheet is specified in the header html file, be default it is
+`styles.css`.
 
 You can grab the following Makefile starter to use ssb in a more comfortable
 way:

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# Usage: run_test <path_to_css>
+
+set -eu
+
+rm -f styles.css
+ssb -g
+ln -fs "$1" styles.css
+ssb -d index.md

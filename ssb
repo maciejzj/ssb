@@ -304,7 +304,7 @@ make_html_files()
 		# Ignore the suggestion because tempf can be expanded immediately
 		# shellcheck disable=SC2064
 		trap "rm $tempf" 0 2 3 15
-		append_posts_list "$posts" | cat "$md_file" - | "$MD_RENDERER" > "$tempf"
+		append_posts_list "$posts" | cat "$md_file" - | eval "$MD_RENDERER" > "$tempf"
 		cat "$HEADER_PATH" "$tempf" "$FOOTER_PATH" > "$output_file"
 	done
 }
