@@ -26,7 +26,7 @@ A piece of *emph* text.
 
 A piece of **strong** text.
 
-![An image](https://api.culture.pl/sites/default/files/styles/260_auto_aspect/public/images/imported/sztuki%20wizualne/portrety/Jarema_mari/jerema_mairia_rolke_ag.jpg?itok=K7cmrkcF)
+![An image](https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Maria_Jarema_Polish_sculptor.jpg/500px-Maria_Jarema_Polish_sculptor.jpg)
 
 A ruler separating text.
 
